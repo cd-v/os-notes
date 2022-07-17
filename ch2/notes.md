@@ -34,7 +34,7 @@
 
 - How can kernel protect applications/users from one another, while allowing CPU to execute code?
     - Hardware must support 3 things:
-        1. Privileged insturctions: potentially unsafe instructions prohibited from execution in user mode
+        1. Privileged instructions: potentially unsafe instructions prohibited from execution in user mode
         2. Memory protection: memory access outside of process' valid memory region is prohibited
         3. Timer interrupts: kernel must have ability to periodically regain control from current process
 

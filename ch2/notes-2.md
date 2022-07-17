@@ -57,4 +57,22 @@
     1. Copy arguments into user memory
     2. Transfer control to user mode
 
-* TODO: Read 2.8, summarize
+
+# User-level Upcalls
+- Illustrates useful pattern:
+    - Need of virtualizing some part of the kernel so applications behave more like OS
+
+- Upcalls: virtualized interrupts/exceptions
+    - Linux: Signals
+    - Windows: Asynchronous events
+
+- Uses:
+    1. Preemptive user-level threads
+        - Timer upcall for trigger to switch tasks, evenly share processor for user-level tasks, end runaway task, etc. 
+    2. Asynchronous IO notification
+        - System call makes request, returns immediately
+        - Then, application polls kernel for IO completion
+            - Or, separate notifcations can be sent via upcall when IO is finished
+    3. Interprocess communication
+    4. User-level exception handling
+    5. User-level resource allocation
