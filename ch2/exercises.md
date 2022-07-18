@@ -15,12 +15,24 @@
 7. a) This would be used whenever we begin a new process, return from an interrupt/exception/system call, switch to another process, or receive a user-level upcall. 
    b) Our kernel will set the PC, SP, stack, and code segment and switch levels, from kernel -> user.
 
-8. TODO
+8. a) Overall, this would make the OS perform faster. Since, in most cases, it would have enough space to hold state in the registers, the kernel would not have to do as much work in getting the state and transferring it whenever a user/kernel level transition occurs.
+   b) c) TODO
 
-9. TODO
+9. a) The point of virtualization is to create a guest operating system that believes it's running in privileged mode, but is just a typical user process. Some instructions, namely popf, suffer from bugs as a result of this. Popf only changes ALU flags in user mode, but will change both ALU flags and system flags (our expected behavior). So, since our guest OS thinks that it is privileged, it will try to use popf to change both ALU/system flags. It is only a user process, though, so only ALU flags change. 
+   b) Create a bit that tells the host OS what level the guest OS has executed the instruction, eg. popf. Then, it can properly set the intended flags.
 
 10. Generally, the kernel. The kernel sets the code segment, program counter, stack pointer, and stack segment into memory, and then sends privilege to the user level.
 
 11. TODO
 
-12. 
+12. Defined in 'costs.c'. Here, our procedure call ends up being a bit faster. This is because for a system call, we have to do considerably more. Notably, our kernel has to save the state, transfer pointers/state, and then switch from user level to kernel level, and back.
+
+13. A trap refers to any synchronous transfer of control from user level to kernel level. In contrast, an interrupt is an asynchronous signal to the processor something's happened that may require its attention, whereas an exception is a hardware event caused by a user program that causes transfer of control to the kernel. If we cannot implement traps, it would be possible to do so with interrupts/exceptions. Since the exception accomplishes a transfer from user to kernel, we could use that to provide the same transfer of control that a trap does. Furthermore, we could even utilize an interrupt to let the CPU know of a process that could utilize the exception.
+
+14. It would not be possible to effectively use exceptions/traps as a substitute for interrupts - namely, because a trap/exception are synchronous calls. By nature, an interrupt is asynchronous. 
+
+15. The hardware switches from user to kernel mode, disables interrupt, and then jumps to the routine specified by the handler at the address given by the interrupt vector table. The routine then saves all registers and execudes the interrupt code. Once done, the registers are restored, and then the kernel goes back to user mode, executing the instruction proceeding the interrupt. If that was the last instruction, then the kernel just jumps to idle and waits. 
+
+16. It would need to be different. This is because if we were switching between levels, there would not be any guarantee the stack is stored in valid memory.
+
+17. Defined in 'rogue.c'.
