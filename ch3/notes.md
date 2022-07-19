@@ -1,14 +1,7 @@
 # The Programming Interface
 - Required application functions (from OS):
-    **1) Process management**
-    **2) I/O**
-    3) Thread management
-    4) Memory management
-    5) File systems/storage
-    6) Networking/distributed systems
-    7) Graphics/window management
-    8) Authentication/security
-- Note: Bolded are chapter focus areas
+    1) **Process management**
+    2) **I/O**
 
 - Location of application functions:
     - Possible options:
