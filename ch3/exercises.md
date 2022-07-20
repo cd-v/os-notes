@@ -18,6 +18,6 @@
 ---
 9) Here, our original process would fork, creating a child process. That parent process would then fork and create another child process. These three processes would have the x values of 20, 15, and 10, respectively. 
 ---
-10) Here, our first program has a parent process that prints out val = 6, and then a child process that prints out val = 7. Our second program has a parent process that exits (printing nothing), and then a child process that prints out val = 6. 
+10) Here, our first program has a parent process that prints out val = 6, and then a child process that prints out val = 6. Our second program has a parent process that exits (printing nothing), and then a child process that prints out val = 6. 
 ---
 11) Defined in 'turtlehouse.c'. 
